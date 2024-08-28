@@ -1,0 +1,37 @@
+#main {
+    width: 580px;
+}
+
+#game-field {
+    margin: 5px;
+    /* background-color: #69dd69; */
+    /* background: linear-gradient( 45deg , green, rgb(21, 243, 169), rgb(6, 109, 156)); */
+    /* background: repeating-linear-gradient( darkgreen 20%, lightgreen 40%, green 50% ); */
+    /* background: radial-gradient( darkgreen 20%, lightgreen 40%, green 50% );  */
+    background: repeating-radial-gradient(darkgreen 20%, lightgreen 40%, darkgreen 50%);
+    border: 10px solid transparent;
+}
+
+#control-panel {
+    margin: 5px 5px 0px 5px;
+    padding: 5px;
+    border: 2px dashed darkgreen;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#start-button {
+    width: 80px;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+}
+
+#score-label {
+    width: 100px;
+    font-size: 16pt;
+    font-weight: bold;
+    text-align: end;
+    color: green;
+}
