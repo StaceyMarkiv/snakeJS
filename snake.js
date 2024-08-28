@@ -58,11 +58,16 @@ let snakeSprite = function (params) {
                 currentX = x;
                 currentY = y;
                 coords.push([currentX, currentY]);
-    
+
                 for (let xy of coords) {
                     let x = xy[0],
                         y = xy[1];
-    
+
+                    //голову змеи красим в другой цвет
+                    if (x === currentX && y === currentY) {
+                        ctx.fillStyle = "rgb(225, 130, 60)";
+                    }
+
                     //рисуем змею
                     ctx.beginPath();
                     ctx.moveTo(x + width / 2, y);                               // Начинаем в середине верхней стороны. 
@@ -412,6 +417,13 @@ function startGame() {
 
         //рисуем яблоко и получаем его координаты
         let [xPosApple, yPosApple] = apple.draw();
+        
+        //проверяем, что яблоко не появилось на змее
+        while (!snake.allowApple(xPosApple, yPosApple)) {
+            apple.clear();
+            snake.draw(xPosApple, yPosApple, redrawGap = true);         //заполняем пробел в теле змеи, оставшийся после удаления с него яблока
+            [xPosApple, yPosApple] = apple.draw();
+        }
 
         let snakeTimer = setInterval(function () {
             //меняем направление движения
@@ -454,6 +466,8 @@ function startGame() {
                 } else {
                     //рисуем яблоко в новых координатах
                     [xPosApple, yPosApple] = apple.draw();
+
+                    //проверяем, что яблоко не появилось на змее
                     while (!snake.allowApple(xPosApple, yPosApple)) {
                         apple.clear();
                         snake.draw(xPosApple, yPosApple, redrawGap = true);         //заполняем пробел в теле змеи, оставшийся после удаления с него яблока
