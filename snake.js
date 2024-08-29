@@ -46,6 +46,11 @@ let snakeSprite = function (params) {
             ctx.fillStyle = "rgb(158, 68, 9)";
 
             if (redrawGap) {
+                //голову змеи красим в другой цвет
+                if (x === currentX && y === currentY) {
+                    ctx.fillStyle = "rgb(225, 130, 60)";
+                }
+
                 //заполняем пробел в теле змеи
                 ctx.beginPath();
                 ctx.moveTo(x + width / 2, y);                               // Начинаем в середине верхней стороны. 
@@ -363,6 +368,21 @@ function updateScore(clearScore = false) {
 }
 
 function startGame() {
+    let levelParams = {
+        'easy': {
+            'maxScore': 15,
+            'gameSpeed': 800,
+        },
+        'medium': {
+            'maxScore': 25,
+            'gameSpeed': 500,
+        },
+        'hard': {
+            'maxScore': 40,
+            'gameSpeed': 300,
+        },
+    };
+
     let startButton = document.getElementById('start-button');
 
     if (startButton.getAttribute('clicked') !== 'true') {
@@ -372,11 +392,21 @@ function startGame() {
         //отключаем повторное нажатие на кнопку "Старт"
         startButton.setAttribute('clicked', true);
 
+        let levelElements = document.getElementsByName('level');
+
+        let selectedLevel;
+        for (let el of levelElements) {
+            if (el.checked) {
+                selectedLevel = el.value;
+            }
+        }
+
         let gameField = document.getElementById('game-field'),                      // игровое поле
             ctx = gameField.getContext('2d'),
             fieldWidth = gameField.width,
             fieldHeight = gameField.height,
-            maxScore = 30,                                                          //кол-во очков для победы
+            maxScore = levelParams[selectedLevel]['maxScore'],                    //кол-во очков для победы
+            gameSpeed = levelParams[selectedLevel]['gameSpeed'],                  //выбранный уровень сложности
 
             snakeSize = appleSize = 50,
             snakeSpeed = 50,                                                        // Исходная скорость змейки
@@ -417,7 +447,7 @@ function startGame() {
 
         //рисуем яблоко и получаем его координаты
         let [xPosApple, yPosApple] = apple.draw();
-        
+
         //проверяем, что яблоко не появилось на змее
         while (!snake.allowApple(xPosApple, yPosApple)) {
             apple.clear();
@@ -488,6 +518,6 @@ function startGame() {
                 //разрешаем снова запустить игру
                 startButton.setAttribute('clicked', false);
             }
-        }, 500);
+        }, gameSpeed);
     }
 }
