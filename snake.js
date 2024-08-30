@@ -379,7 +379,7 @@ function startGame() {
         },
         'hard': {
             'maxScore': 40,
-            'gameSpeed': 300,
+            'gameSpeed': 350,
         },
     };
 
