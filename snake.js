@@ -456,21 +456,29 @@ function startGame() {
         }
 
         let snakeTimer = setInterval(function () {
+            let blockArrows = false;
+
             //меняем направление движения
             document.onkeydown = function (e) {
-                switch (e.key) {
-                    case 'ArrowUp':
-                        direction = (direction !== 'down') ? 'up' : 'down';
-                        break;
-                    case 'ArrowDown':
-                        direction = (direction !== 'up') ? 'down' : 'up';
-                        break;
-                    case 'ArrowLeft':
-                        direction = (direction !== 'right') ? 'left' : 'right';
-                        break;
-                    case 'ArrowRight':
-                        direction = (direction !== 'left') ? 'right' : 'left';
-                        break;
+                if (!blockArrows) {
+                    switch (e.key) {
+                        case 'ArrowUp':
+                            direction = (direction !== 'down') ? 'up' : 'down';
+                            blockArrows = true;         // запрещаем повторное нажатие стрелок в течение этой итерации таймера
+                            break;
+                        case 'ArrowDown':
+                            direction = (direction !== 'up') ? 'down' : 'up';
+                            blockArrows = true;         // запрещаем повторное нажатие стрелок в течение этой итерации таймера
+                            break;
+                        case 'ArrowLeft':
+                            direction = (direction !== 'right') ? 'left' : 'right';
+                            blockArrows = true;         // запрещаем повторное нажатие стрелок в течение этой итерации таймера
+                            break;
+                        case 'ArrowRight':
+                            direction = (direction !== 'left') ? 'right' : 'left';
+                            blockArrows = true;         // запрещаем повторное нажатие стрелок в течение этой итерации таймера
+                            break;
+                    }
                 }
             };
 
