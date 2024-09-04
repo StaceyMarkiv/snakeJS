@@ -1,3 +1,9 @@
+body {
+    background-color: rgb(158, 229, 241);
+    /* background: linear-gradient(45deg, rgb(158, 229, 241), rgb(21, 243, 169), rgb(158, 229, 241)); */
+
+}
+
 #main {
     width: 580px;
 }
@@ -5,7 +11,6 @@
 #game-field {
     margin: 5px;
     /* background-color: #69dd69; */
-    /* background: linear-gradient( 45deg , green, rgb(21, 243, 169), rgb(6, 109, 156)); */
     /* background: repeating-linear-gradient( darkgreen 20%, lightgreen 40%, green 50% ); */
     /* background: radial-gradient( darkgreen 20%, lightgreen 40%, green 50% );  */
     background: repeating-radial-gradient(darkgreen 20%, lightgreen 40%, darkgreen 50%);
